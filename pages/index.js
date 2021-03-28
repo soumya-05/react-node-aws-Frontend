@@ -3,6 +3,8 @@ import Layout from '../components/Layout'
 import axios from 'axios'
 import moment from 'moment'
 import Link from 'next/link'
+import getConfig from 'next/config'
+const { publicRuntimeConfig } = getConfig()
 
 const Home = ({ categories }) => {
   const [popular, setPopular] = useState([])
@@ -12,7 +14,7 @@ const Home = ({ categories }) => {
   }, [])
 
   const loadPopular = async () => {
-    const response = await axios.get('http://localhost:8000/api/link/popular')
+    const response = await axios.get(`${publicRuntimeConfig.API}/link/popular`)
     // console.log(response);
     setPopular(response.data)
   }
